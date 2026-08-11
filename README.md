@@ -96,10 +96,10 @@ During a manual backup, Notehold prints its current stage and shows an elapsed-t
 
 ## Documentation
 
-- [Configuration](docs/CONFIGURATION.md): destination, schedule, cleanup, and retention preview.
+- [Configuration](docs/CONFIGURATION.md): destination, schedule, cleanup, retention, and Resend email notifications.
 - [How Notehold works and troubleshooting](docs/HOW-IT-WORKS.md): verification, failures, installed files, and logs.
-- [Configuration](docs/CONFIGURATION.md): destination, schedule, retention, and Resend email notifications.
 - [Recovering notes](docs/RECOVERY.md): offline recovery from a backup ZIP.
+- [Changelog](CHANGELOG.md): notable changes in each release.
 - [Contributing](CONTRIBUTING.md): local testing and release instructions.
 
 ## Uninstall
