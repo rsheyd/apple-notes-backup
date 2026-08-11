@@ -9,7 +9,7 @@ Notehold installs a user LaunchAgent that checks at login and approximately once
 3. Move the completed ZIP into the destination and write an adjacent SHA-256 checksum.
 4. If cleanup is enabled, verify and move redundant archive/checksum pairs to Trash.
 5. Reopen Notes if it was open before the backup.
-6. If configured, ask Resend to email the result after a successful new backup or a failed attempt.
+6. If configured, ask Resend to email the result and current backup inventory after a successful new backup or a failed attempt.
 
 A lock prevents overlapping runs. Partial archives and checksums are removed after errors, so the destination receives only completed backups.
 

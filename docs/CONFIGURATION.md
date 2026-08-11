@@ -51,7 +51,7 @@ The newest archive, incomplete pairs, invalid checksum metadata, and archives th
 
 ## Email notifications with Resend
 
-Notehold can send an email after it creates and verifies a new backup, and whenever a backup attempt fails. Daily checks that find a recent backup do not send email. A notification-delivery problem is recorded in the backup log but does not invalidate or remove a completed archive.
+Notehold can send an email after it creates and verifies a new backup, and whenever a backup attempt fails. Each email includes a newest-first list of saved backups, their sizes, and the total space used by the ZIP archives. Daily checks that find a recent backup do not send email. A notification-delivery problem is recorded in the backup log but does not invalidate or remove a completed archive.
 
 Create a Resend sending API key and make it available to the current shell as `RESEND_NOTEHOLD_API_TOKEN`. Then configure the destination and sender:
 

@@ -70,6 +70,14 @@ send_email_notification() {
   fi
 }
 
+backup_inventory() {
+  if inventory=$("$SCRIPT_DIR/list-backups.sh" 2>&1); then
+    /usr/bin/printf '%s\n' "$inventory"
+  else
+    /usr/bin/printf 'Saved-backup inventory unavailable: %s\n' "$inventory"
+  fi
+}
+
 run_retention_preview() {
   set +e
   retention_output=$("$SCRIPT_DIR/manage-retention.sh" --preview 2>&1)
@@ -130,9 +138,12 @@ cleanup() {
 
   if [ "$status" -ne 0 ]; then
     log "ERROR: backup failed with status $status."
+    inventory=$(backup_inventory)
     send_email_notification \
       "Notehold backup failed on $(/bin/hostname -s)" \
-      "Notehold could not create a backup on $(/bin/hostname -s) at $(timestamp). The backup process exited with status $status. Run 'notehold status' and inspect the backup log for details."
+      "Notehold could not create a backup on $(/bin/hostname -s) at $(timestamp). The backup process exited with status $status. Run 'notehold status' and inspect the backup log for details.
+
+$inventory"
   fi
   exit "$status"
 }
@@ -225,9 +236,12 @@ partial_checksum=""
 size=$(/usr/bin/du -h "$archive" | /usr/bin/awk '{print $1}')
 log "Backup complete: $(/usr/bin/basename "$archive") ($size, SHA-256 $checksum)."
 progress "Backup complete: $(/usr/bin/basename "$archive") ($size)."
+inventory=$(backup_inventory)
 send_email_notification \
   "Notehold backup completed on $(/bin/hostname -s)" \
-  "Notehold created $(/usr/bin/basename "$archive") at $(timestamp). Size: $size. SHA-256: $checksum."
+  "Notehold created $(/usr/bin/basename "$archive") at $(timestamp). Size: $size. SHA-256: $checksum.
+
+$inventory"
 
 if [ "$AUTO_CLEANUP" = "true" ]; then
   if ! "$SCRIPT_DIR/manage-retention.sh" --apply; then

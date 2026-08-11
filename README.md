@@ -86,7 +86,7 @@ Avoiding the Bash permission would require a separately signed executable or Mac
 
 - `notehold backup` creates a backup immediately.
 - `notehold status` shows the installed settings, service state, latest activity, and recent backups.
-- `notehold list` lists every completed backup newest-first, with its size, date, and checksum-file status.
+- `notehold list` lists every completed backup newest-first, with its size, date, and checksum-file status, followed by the total space used.
 - `notehold version` shows the installed version.
 - `notehold uninstall` removes Notehold without removing backups or logs.
 

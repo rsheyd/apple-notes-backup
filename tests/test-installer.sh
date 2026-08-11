@@ -2,6 +2,9 @@
 
 set -eu
 
+# Synthetic installs must never inherit a developer's real Resend credential.
+export RESEND_NOTEHOLD_API_TOKEN=
+
 readonly PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
 readonly INSTALLER="$PROJECT_DIR/scripts/install-launchagent.sh"
 

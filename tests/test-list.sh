@@ -16,6 +16,7 @@ backup_dir="$work_dir/backups"
 
 empty_output=$(BACKUP_DIR="$backup_dir" "$LIST_SCRIPT")
 /usr/bin/printf '%s\n' "$empty_output" | /usr/bin/grep -Fq 'No backups found.'
+/usr/bin/printf '%s\n' "$empty_output" | /usr/bin/grep -Fq 'Total: 0 backups, 0 KB'
 
 /usr/bin/printf 'older\n' >"$backup_dir/apple-notes-2026-01-01.zip"
 /usr/bin/printf 'newer\n' >"$backup_dir/apple-notes-2026-02-01.zip"
@@ -28,6 +29,7 @@ first_archive=$(/usr/bin/printf '%s\n' "$output" | /usr/bin/grep '^apple-notes-'
 /usr/bin/printf '%s\n' "$first_archive" | /usr/bin/grep -Fq 'apple-notes-2026-02-01.zip'
 /usr/bin/printf '%s\n' "$first_archive" | /usr/bin/grep -Fq 'checksum present'
 /usr/bin/printf '%s\n' "$output" | /usr/bin/grep 'apple-notes-2026-01-01.zip' | /usr/bin/grep -Fq 'checksum missing'
+/usr/bin/printf '%s\n' "$output" | /usr/bin/grep -Eq '^Total: 2 backups, [0-9.]+ KB$'
 
 if BACKUP_DIR="$work_dir/missing" "$LIST_SCRIPT" >/dev/null 2>&1; then
   echo "Unavailable backup destination unexpectedly succeeded." >&2
